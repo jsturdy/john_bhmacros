@@ -12,6 +12,7 @@
 #include <TROOT.h>
 
 void SThist(void);
+float dR(float eta1, float phi1, float eta2, float phi2);
 
 void SThist(std::string filename) {
   // define output file and output histogram
