@@ -5,17 +5,17 @@
 class MCSample:
     # Holds the name of a sample, the file where the sample is stored,
     # the cross section for a sample, and the number of events in the sample
-    def __init__(self, sampleName, sampleFile, xSect, nEvents):
-        self.sampleName = sampleName
-        self.sampleFile = sampleFile
+    def __init__(self, sourceSample, ntupleFile, xSect, nEvents):
+        self.sourceSample = sourceSample
+        self.ntupleFile = ntupleFile
         self.xSect = xSect
         self.nEvents = nEvents
 
     def getSampleName(self):
-        print "Sample name: %s" % self.sampleName
+        print "Sample name on DAS: %s" % self.sourceSample
 
     def getSampleFile(self):
-        print "   --> filename: %s" % self.sampleFile
+        print "   --> filename: %s" % self.ntupleFile
 
     def getXSect(self):
         print "   --> cross sction: %f" % self.xSect
@@ -30,13 +30,13 @@ class MCSampleWithWeight:
         self.weight = weight
 
     def showWeight(self):
-        print "Sample with filename %s has weight %f" % (self.mcSampleObj.sampleFile, self.weight)
+        print "Sample with filename %s has weight %f" % (self.mcSampleObj.ntupleFile, self.weight)
 
 class MCSamplesWeightsMap:
     # Holds a map of different samples with different weights and provides methods to
     # print out info about the map and to return the map in an easily navigable array
     def __init__(self, lumi, filename):
-        self.lumi = lumi
+        self.lumi = float(lumi)
         self.fileName = filename
         self.samples = []
         self.samplesWithWeights = []
@@ -61,8 +61,8 @@ class MCSamplesWeightsMap:
     def getMap(self):
         mcMap = [];
         for sampleWithWeight in self.samplesWithWeights:
-            mcMapRow = [sampleWithWeight.mcSampleObj.sampleName,
-                        sampleWithWeight.mcSampleObj.sampleFile,
+            mcMapRow = [sampleWithWeight.mcSampleObj.sourceSample,
+                        sampleWithWeight.mcSampleObj.ntupleFile,
                         sampleWithWeight.weight]
             mcMap.append(mcMapRow)
         return mcMap

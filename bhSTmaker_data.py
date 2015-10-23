@@ -18,5 +18,5 @@ if len(sys.argv)!=2:
 	exit(1)
 
 macroName = "SThist.cc"
-inputFile = "samplesLists/%s" % str(sys.argv[1])
+inputFile = "samplesLists_data/%s" % str(sys.argv[1])
 callMacro(macroName, inputFile)
