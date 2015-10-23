@@ -11,10 +11,10 @@
 
 #include <TROOT.h>
 
-void SThist(void);
+void SThist_data(void);
 float dR(float eta1, float phi1, float eta2, float phi2);
 
-void SThist(std::string filename) {
+void SThist_data(std::string filename) {
   // define output file and output histogram
   TFile *outfile = new TFile("outfile_data.root","RECREATE");
   TH1F stHist = TH1F("stHist", "ST", 100, 700, 9700);
