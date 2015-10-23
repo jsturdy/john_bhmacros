@@ -15,7 +15,7 @@ void SThist(void);
 
 void SThist(std::string filename) {
   // define output file and output histogram
-  TFile outfile = TFile("outfile_data.root","RECREATE");
+  TFile outfile = new TFile("outfile_data.root","RECREATE");
   TH1F stHist = TH1F("stHist", "ST", 100, 700, 9700);
 
   // variables calculated in the loop
