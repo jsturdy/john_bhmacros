@@ -202,7 +202,7 @@ void SThist(std::string filename) {
 		}
 		for (int iMuon = 0; iMuon < 25; ++iMuon) {
 			if (MuPt[iMuon]>20.) {
-				for (iJet = 0; iJet < 25; ++iJet ) {
+				for (int iJet = 0; iJet < 25; ++iJet ) {
 					if (dR(MuEta[iMuon],MuPhi[iMuon], JetEta[iJet], JetPhi[iJet]) < 0.3) {
 						passIso = false;
 						break;
@@ -218,7 +218,7 @@ void SThist(std::string filename) {
 				}
 				if (!passIso) continue;
 
-				for (iPhoton = 0; iPhoton < 25; ++iPhoton ) {
+				for (int iPhoton = 0; iPhoton < 25; ++iPhoton ) {
 					if (dR( MuEta[iMuon], MuPhi[iMuon], PhEta[iPhoton], PhPhi[iPhoton]) < 0.3) {
 						passIso = false;
 						break;
