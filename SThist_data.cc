@@ -16,7 +16,7 @@ float dR(float eta1, float phi1, float eta2, float phi2);
 
 void SThist(std::string filename) {
   // define output file and output histogram
-  TFile outfile = new TFile("outfile_data.root","RECREATE");
+  TFile *outfile = new TFile("outfile_data.root","RECREATE");
   TH1F stHist = TH1F("stHist", "ST", 100, 700, 9700);
 
   // variables calculated in the loop
@@ -165,7 +165,7 @@ void SThist(std::string filename) {
 				}
 				if (!passIso) continue;
 
-				//cout << "    ElePt for jet number " << iElectron << " is: " << ElePt[iElectron] << endl;
+				//cout << "    ElePt for electron number " << iElectron << " is: " << ElePt[iElectron] << endl;
 				ST += ElePt[iElectron];
 			}
 			else break;
@@ -196,7 +196,7 @@ void SThist(std::string filename) {
 				}
 				if (!passIso) continue;
 
-				//cout << "    PhPt for jet number " << iPhoton << " is: " << PhPt[iPhoton] << endl;
+				//cout << "    PhPt for photon number " << iPhoton << " is: " << PhPt[iPhoton] << endl;
 				ST += PhPt[iPhoton];
 			}
 			else break;
@@ -227,8 +227,8 @@ void SThist(std::string filename) {
 				}
 				if (!passIso) continue;
 
-				//cout << "    PhPt for jet number " << iPhoton << " is: " << PhPt[iPhoton] << endl;
-				ST += PhPt[iPhoton];
+				//cout << "    MuPt for muon number " << iMuon << " is: " << MuPt[iMuon] << endl;
+				ST += MuPt[iMuon];
 			}
 			else break;
 		}
@@ -239,7 +239,7 @@ void SThist(std::string filename) {
 		//if (nPassedEvents==5) break;
 	}
   // write the histogram and the output file
-  outfile.cd();
+  outfile->cd();
   stHist.Write();
   //
   // clean up
