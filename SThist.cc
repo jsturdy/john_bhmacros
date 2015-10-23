@@ -25,7 +25,10 @@ void SThist(std::string filename) {
 	int nPassedEvents = 0    ;
 
   // variables accessed from the tree
-	Bool_t firedHLT_PFHT800_v2;
+	Bool_t firedHLT_PFHT800_v2       ;
+	Bool_t passed_CSCTightHaloFilter ;
+	Bool_t passed_goodVertices       ;
+	Bool_t passed_eeBadScFilter      ;
 	float    *JetPt   = new float[25];
 	float    *JetEta  = new float[25];
 	float    *JetPhi  = new float[25];
@@ -67,7 +70,10 @@ void SThist(std::string filename) {
 	cout << "Opened chain: " << chain.GetName() << endl;
 
   // set all branch addresses
-	chain.SetBranchAddress( "firedHLT_PFHT800_v2", &firedHLT_PFHT800_v2);
+	chain.SetBranchAddress( "firedHLT_PFHT800_v2"       , &firedHLT_PFHT800_v2       );
+	chain.SetBranchAddress( "passed_CSCTightHaloFilter" , &passed_CSCTightHaloFilter );
+	chain.SetBranchAddress( "passed_goodVertices"       , &passed_goodVertices       );
+	chain.SetBranchAddress( "passed_eeBadScFilter"      , &passed_eeBadScFilter      );
 	chain.SetBranchAddress( "JetPt",  JetPt,  &b_JetPt  );
 	chain.SetBranchAddress( "JetEta", JetEta, &b_JetEta );
 	chain.SetBranchAddress( "JetPhi", JetPhi, &b_JetPhi );
@@ -86,7 +92,7 @@ void SThist(std::string filename) {
 
   // loop over all events
 	for (int iEvent = 0; iEvent < nEvents; ++iEvent) {
-    if (iEvent % 1000 == 0) cout << "Processed " << iEvent << " events, of which " << nPassedEvents << " have passed the PFHT800 trigger." << endl;
+    if (iEvent % 1000 == 0) cout << "Processed " << iEvent << " events, of which " << nPassedEvents << " have passed the trigger and filter requirements." << endl;
 
     // reset variables
 		ST      = 0.   ;
@@ -94,7 +100,9 @@ void SThist(std::string filename) {
 		passIso = true ;
  
 		chain.GetEntry(iEvent);
-		if (!firedHLT_PFHT800_v2) continue;
+    // apply trigger and filter requirements
+		if (    !firedHLT_PFHT800_v2 || !passed_CSCTightHaloFilter 
+         || !passed_goodVertices || !passed_eeBadScFilter      ) continue;
     
     // apply isolation requirement and calculate ST.
 		//cout << "For event number " << iEvent << endl;
