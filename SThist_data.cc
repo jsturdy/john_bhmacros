@@ -15,7 +15,7 @@ void SThist(void);
 
 void SThist(std::string filename) {
   // define output file and output histogram
-  TFile outfile = TFile("outfile.root","RECREATE");
+  TFile outfile = TFile("outfile_data.root","RECREATE");
   TH1F stHist = TH1F("stHist", "ST", 100, 700, 9700);
 
   // variables calculated in the loop
@@ -210,7 +210,7 @@ void SThist(std::string filename) {
 				}
 				if (!passIso) continue;
 
-				for (iElectron = 0; iElectron < 25; ++iElectron ) {
+				for (int iElectron = 0; iElectron < 25; ++iElectron ) {
 					if (dR(MuEta[iMuon], MuPhi[iMuon], EleEta[iElectron],ElePhi[iElectron]) < 0.3) {
 						passIso = false;
 						break;
