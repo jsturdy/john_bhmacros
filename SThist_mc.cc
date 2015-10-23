@@ -9,7 +9,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <typeinfo.h>
 
 #include <TROOT.h>
 
@@ -28,10 +27,7 @@ void SThist_mc(std::string filename) {
 	int nPassedEvents = 0    ;
 
   // variables accessed from the tree
-	Bool_t firedHLT_PFHT800_v2       ;
-	Bool_t passed_CSCTightHaloFilter ;
-	Bool_t passed_goodVertices       ;
-	Bool_t passed_eeBadScFilter      ;
+	//Bool_t firedHLT_PFHT800_v2       ;
 	float    *JetPt   = new float[25];
 	float    *JetEta  = new float[25];
 	float    *JetPhi  = new float[25];
@@ -85,10 +81,7 @@ void SThist_mc(std::string filename) {
 	  cout << "Opened chain: " << chain.GetName() << endl;
 
     // set all branch addresses
-	  chain.SetBranchAddress( "firedHLT_PFHT800_v2"       , &firedHLT_PFHT800_v2       );
-	  chain.SetBranchAddress( "passed_CSCTightHaloFilter" , &passed_CSCTightHaloFilter );
-	  chain.SetBranchAddress( "passed_goodVertices"       , &passed_goodVertices       );
-	  chain.SetBranchAddress( "passed_eeBadScFilter"      , &passed_eeBadScFilter      );
+	  //chain.SetBranchAddress( "firedHLT_PFHT800_v2"       , &firedHLT_PFHT800_v2       );
 	  chain.SetBranchAddress( "JetPt",  JetPt,  &b_JetPt  );
 	  chain.SetBranchAddress( "JetEta", JetEta, &b_JetEta );
 	  chain.SetBranchAddress( "JetPhi", JetPhi, &b_JetPhi );
