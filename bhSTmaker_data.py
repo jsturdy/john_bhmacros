@@ -17,6 +17,6 @@ if len(sys.argv)!=2:
 	print "     python bhSTmaker.py exampleList.tx"
 	exit(1)
 
-macroName = "SThist.cc"
+macroName = "SThist_data.cc"
 inputFile = "samplesLists_data/%s" % str(sys.argv[1])
 callMacro(macroName, inputFile)
