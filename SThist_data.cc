@@ -93,7 +93,7 @@ void SThist_data(std::string filename) {
 
   // loop over all events
 	for (int iEvent = 0; iEvent < nEvents; ++iEvent) {
-    if (iEvent % 1000 == 0) cout << "Processed " << iEvent << " events, of which " << nPassedEvents << " have passed the trigger and filter requirements." << endl;
+    if (iEvent % 25000 == 0) cout << "Processed " << iEvent << " events, of which " << nPassedEvents << " have passed the trigger and filter requirements." << endl;
 
     // reset variables
 		ST      = 0.   ;

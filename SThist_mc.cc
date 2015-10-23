@@ -14,6 +14,8 @@
 
 void SThist_mc(void);
 float dR(float eta1, float phi1, float eta2, float phi2);
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
+std::vector<std::string> split(const std::string &s, char delim);
 
 void SThist_mc(std::string filename) {
   // define output file and output histogram
@@ -100,7 +102,7 @@ void SThist_mc(std::string filename) {
 
     // loop over all events
 	  for (int iEvent = 0; iEvent < nEvents; ++iEvent) {
-      if (iEvent % 1000 == 0) cout << "Processed " << iEvent << " events, of which " << nPassedEvents << " have passed the trigger and filter requirements." << endl;
+      if (iEvent % 25000 == 0) cout << "Processed " << iEvent << " events." << endl; //, of which " << nPassedEvents << " have passed the trigger and filter requirements." << endl;
 
       // reset variables
 	  	ST      = 0.   ;
