@@ -14,10 +14,11 @@
 #include <TROOT.h>
 
 void SThist_mc(void);
+float dR(float eta1, float phi1, float eta2, float phi2);
 
 void SThist_mc(std::string filename) {
   // define output file and output histogram
-  TFile outfile = TFile("outfile.root","RECREATE");
+  TFile *outfile = new TFile("outfile_mc.root","RECREATE");
   TH1F stHist = TH1F("stHist", "ST", 100, 700, 9700);
 
   // variables calculated in the loop
@@ -178,7 +179,7 @@ void SThist_mc(std::string filename) {
 	  			}
 	  			if (!passIso) continue;
 
-	  			//cout << "    ElePt for jet number " << iElectron << " is: " << ElePt[iElectron] << endl;
+	  			//cout << "    ElePt for electron number " << iElectron << " is: " << ElePt[iElectron] << endl;
 	  			ST += ElePt[iElectron];
 	  		}
 	  		else break;
@@ -209,14 +210,14 @@ void SThist_mc(std::string filename) {
 	  			}
 	  			if (!passIso) continue;
 
-	  			//cout << "    PhPt for jet number " << iPhoton << " is: " << PhPt[iPhoton] << endl;
+	  			//cout << "    PhPt for photon number " << iPhoton << " is: " << PhPt[iPhoton] << endl;
 	  			ST += PhPt[iPhoton];
 	  		}
 	  		else break;
 	  	}
 	  	for (int iMuon = 0; iMuon < 25; ++iMuon) {
 	  		if (MuPt[iMuon]>20.) {
-	  			for (iJet = 0; iJet < 25; ++iJet ) {
+	  			for (int iJet = 0; iJet < 25; ++iJet ) {
 	  				if (dR(MuEta[iMuon],MuPhi[iMuon], JetEta[iJet], JetPhi[iJet]) < 0.3) {
 	  					passIso = false;
 	  					break;
@@ -224,7 +225,7 @@ void SThist_mc(std::string filename) {
 	  			}
 	  			if (!passIso) continue;
 
-	  			for (iElectron = 0; iElectron < 25; ++iElectron ) {
+	  			for (int iElectron = 0; iElectron < 25; ++iElectron ) {
 	  				if (dR(MuEta[iMuon], MuPhi[iMuon], EleEta[iElectron],ElePhi[iElectron]) < 0.3) {
 	  					passIso = false;
 	  					break;
@@ -232,7 +233,7 @@ void SThist_mc(std::string filename) {
 	  			}
 	  			if (!passIso) continue;
 
-	  			for (iPhoton = 0; iPhoton < 25; ++iPhoton ) {
+	  			for (int iPhoton = 0; iPhoton < 25; ++iPhoton ) {
 	  				if (dR( MuEta[iMuon], MuPhi[iMuon], PhEta[iPhoton], PhPhi[iPhoton]) < 0.3) {
 	  					passIso = false;
 	  					break;
@@ -240,8 +241,8 @@ void SThist_mc(std::string filename) {
 	  			}
 	  			if (!passIso) continue;
 
-	  			//cout << "    PhPt for jet number " << iPhoton << " is: " << PhPt[iPhoton] << endl;
-	  			ST += PhPt[iPhoton];
+	  			//cout << "    MuPt for muon number " << iMuon << " is: " << MuPt[iMuon] << endl;
+	  			ST += MuPt[iMuon];
 	  		}
 	  		else break;
 	  	}
@@ -253,7 +254,7 @@ void SThist_mc(std::string filename) {
 	  }
   }
   // write the histogram and the output file
-  outfile.cd();
+  outfile->cd();
   stHist.Write();
   //
   // clean up
