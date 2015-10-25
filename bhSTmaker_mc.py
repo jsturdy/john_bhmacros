@@ -17,14 +17,14 @@ import sys
 from macrotools import *
 from calcweights import *
 
-if len(sys.argv)!=3:
-	print "Please supply two arguments to bhSTmaker_mc.py"
+if len(sys.argv)!=4:
+	print "Please supply three arguments to bhSTmaker_mc.py"
 	print " --> Example:"
-	print "     python bhSTmaker_mc.py exampleList.tx 1337"
+	print "     python bhSTmaker_mc.py exampleList.tx outFile.root 1337"
 	exit(1)
 
 sampleListFile = "samplesLists_mc/" + sys.argv[1]
-mcMap = MCSamplesWeightsMap(sys.argv[2], sampleListFile)
+mcMap = MCSamplesWeightsMap(sys.argv[3], sampleListFile)
 mapArray = mcMap.getMap()
 samplesWithWeightsFile = open(".tmp.tx", "w")
 for mapRow in mapArray:
@@ -32,5 +32,6 @@ for mapRow in mapArray:
 samplesWithWeightsFile.close()
 
 macroName = "SThist_mc.cc"
+outputFile = sys.argv[2]
 tmpFile = ".tmp.tx"
-callMacro(macroName, tmpFile)
+callMacro(macroName, tmpFile, outputFile)

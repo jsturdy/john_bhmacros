@@ -12,14 +12,14 @@
 
 #include <TROOT.h>
 
-void SThist_mc(void);
+void SThist_mc(std::string inFilename, std::string outFilename);
 float dR(float eta1, float phi1, float eta2, float phi2);
 std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
 std::vector<std::string> split(const std::string &s, char delim);
 
-void SThist_mc(std::string filename) {
+void SThist_mc(std::string filename, std::string outFilename) {
   // define output file and output histogram
-  TFile *outfile = new TFile("outfile_mc.root","RECREATE");
+  TFile *outfile = new TFile(outFilename.c_str(),"RECREATE");
   TH1F stHist = TH1F("stHist", "ST", 100, 700, 9700);
 
   // variables calculated in the loop

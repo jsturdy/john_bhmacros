@@ -11,12 +11,12 @@
 
 #include <TROOT.h>
 
-void SThist_data(void);
+void SThist_data(std::string inFilename, std::string outFilename);
 float dR(float eta1, float phi1, float eta2, float phi2);
 
-void SThist_data(std::string filename) {
+void SThist_data(std::string inFilename, std::string outFilename) {
   // define output file and output histogram
-  TFile *outfile = new TFile("outfile_data.root","RECREATE");
+  TFile *outfile = new TFile(outFilename.c_str(),"RECREATE");
   TH1F stHist = TH1F("stHist", "ST", 100, 700, 9700);
 
   // variables calculated in the loop

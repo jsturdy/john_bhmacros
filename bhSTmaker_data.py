@@ -11,12 +11,13 @@
 import sys
 from macrotools import *
 
-if len(sys.argv)!=2:
-	print "Please supply one argument to bhSTmaker.py"
+if len(sys.argv)!=3:
+	print "Please supply two arguments to bhSTmaker.py"
 	print " --> Example:"
-	print "     python bhSTmaker.py exampleList.tx"
+	print "     python bhSTmaker.py exampleList.tx outFile.root"
 	exit(1)
 
 macroName = "SThist_data.cc"
 inputFile = "samplesLists_data/%s" % str(sys.argv[1])
-callMacro(macroName, inputFile)
+outputFile = "output/%s" % str(sys.argv[2])
+callMacro(macroName, inputFile, outputFile)
