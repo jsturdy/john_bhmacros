@@ -70,6 +70,10 @@ def clearSplitLists(dataOrMC):
 	if dataOrMC == "mc":
 		samplesListsDir="samplesLists_mc"
 	splitListsDir=samplesListsDir+"/splitLists/"
+
+        if not os.path.exists(splitListsDir):
+                os.makedirs(splitListsDir)
+	
 	for the_file in os.listdir(splitListsDir):
 		file_path = os.path.join(splitListsDir, the_file)
 		try:
@@ -81,6 +85,10 @@ def clearSplitLists(dataOrMC):
 
 def clearBsubShellScripts():
 	bSubScriptsDir="bsubs/"
+
+        if not os.path.exists(bSubScriptsDir):
+                os.makedirs(bSubScriptsDir)
+
 	for the_file in os.listdir(bSubScriptsDir):
 		file_path = os.path.join(bSubScriptsDir, the_file)
 		try:
