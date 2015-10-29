@@ -47,7 +47,7 @@ def bSubSplitJobs(pyScriptName, dataOrMC, inputFile, numberOfJobs):
 	clearBsubShellScripts()
 	nJobs = splitJobsForBsub(dataOrMC, inputFile, numberOfJobs)
 	print "Prepared %i jobs ready to be submitted to bsub." % nJobs
-	for i in range (1, numberOfJobs+1):
+	for i in range (1, nJobs+1):
 		splitListFile="split_%i_%s" % (i , inputFile)
 		pyCommand = "python " + pyScriptName + " splitLists/" + splitListFile + " " + "output/" + pyScriptName + "-output_%i-" %i + inputFile + ".root"
 		if dataOrMC == "mc":
